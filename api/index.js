@@ -1,25 +1,45 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT;
 const DB_URL = process.env.DB_URL;
-app.use(express.json());
 
-mongoose.connect(DB_URL)
-.then(()=>{
+const allowedOrigins = [
+  "https://pet-stay-back-end.vercel.app/",
+  "http://localhost:5173",
+];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }),
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+mongoose
+  .connect(DB_URL)
+  .then(() => {
     console.log("Database connected successfully");
-})
-.catch(()=>{
+  })
+  .catch(() => {
     console.log("Database connection failed");
     process.exit(1);
-})
+  });
 
-
-app.get("/", (req,res)=>{
-    res.status(200).json({
-        message: "Welcome to Pet Stay"
-    });
-})
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Welcome to Pet Stay",
+  });
+});
 
 // app.listen(port, ()=>{
 //     console.log(`Server is running on port ${port}`);
