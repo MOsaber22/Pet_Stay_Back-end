@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
+require('dotenv').config();
 const app = express();
+
+const cors = require("cors");
+const catsRoutes = require("../routes/cats.routes");
 const port = process.env.PORT;
 const DB_URL = process.env.DB_URL;
 
@@ -41,7 +44,11 @@ app.get("/", (req, res) => {
   });
 });
 
-// app.listen(port, ()=>{
-//     console.log(`Server is running on port ${port}`);
-// })
-module.exports = app;
+app.use("/api/v1/cats", catsRoutes);
+
+
+app.listen(port, ()=>{
+    console.log(`Server is running on port ${port}`);
+})
+// module.exports = app;
+ 
