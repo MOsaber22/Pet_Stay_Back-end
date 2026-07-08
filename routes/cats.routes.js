@@ -7,8 +7,8 @@ const addCat = require("../controller/cats/add_new_cat.controller");
 const deleteCat = require("../controller/cats/delete_cat.controller");
 
 routes.get("/", getAllCats);
-routes.get("/:id", viewCat);
-routes.put("/:id", updateCat);
+routes.get("/:catId", viewCat);
+routes.put("/:catId", updateCat);
 routes.post("/", addCat);
-routes.delete("/:id", deleteCat);
+routes.delete("/:catId", deleteCat);
 module.exports = routes;
