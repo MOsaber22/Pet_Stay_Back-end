@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const catsRoutes = require("../routes/cats.routes");
 const cartRoutes = require("../routes/cart.routes");
+const userRoutes = require("../routes/user.routes");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(
 
 app.use("/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
+app.use("/api/v1/users", userRoutes);
 
 
 mongoose
