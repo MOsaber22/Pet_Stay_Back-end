@@ -19,9 +19,9 @@ const viewCat = async (req, res) => {
       data: viewedCat,
     });
   } catch (err) {
-    res.status(400).json({
-      status_code: 400,
-      message: "Invalid cat ID",
+    res.status(500).json({
+      status_code: 500,
+      message: err.message,
       data: null,
     });
   }

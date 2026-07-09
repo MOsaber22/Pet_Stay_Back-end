@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const governorates = require("./governorates");
+
 const catsSchema = new mongoose.Schema(
   {
     name: {
@@ -27,13 +29,27 @@ const catsSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["available", "adopted", "reserved", "pending"],
+      enum: ["available", "adopted", "reserved", "pending", "rejected"],
       default: "available",
     },
     image: {
-      type: String,
+      type: [String],
       required: [true, "Image is required"],
     },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", //users model can be change later because it didn't done yet
+      // required: true,
+    },
+    adopted_by: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", //users model can be change later because it didn't done yet
+    },
+    location: {
+      type: String,
+      enum: governorates,
+      required: [true, "location is required"],
+    }
   },
   { timestamps: true },
 );

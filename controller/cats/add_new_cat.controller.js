@@ -1,8 +1,8 @@
 const catsModel = require("../../model/cats.model");
 
 const addNewCat = async (req, res) => {
-  const { name, age, gender, breed, image } = req.body;
-  if (!name || !age || !gender || !breed || !image) {
+  const { name, age, gender, breed, image, location } = req.body;
+  if (!name || !age || !gender || !breed || !image || !location) {
     return res.status(400).json({
       status_code: 400,
       message: "please enter all required fields",
