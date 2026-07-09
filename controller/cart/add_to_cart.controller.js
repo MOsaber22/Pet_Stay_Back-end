@@ -2,16 +2,10 @@ const Cart = require("../../model/cart.model");
 
 const addToCart = async (req, res) => {
   try {
-    console.log(req.body);
 
     const { userId, catId } = req.body;
 
-    console.log("User ID:", userId);
-    console.log("Cat ID:", catId);
-
     let cart = await Cart.findOne({ user: userId });
-
-    console.log("Found Cart:", cart);
 
     if (!cart) {
       cart = new Cart({
