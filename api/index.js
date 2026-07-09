@@ -35,7 +35,7 @@ app.use(
 );
 
 
-app.use("/cart", cartRoutes);
+app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
 
 
