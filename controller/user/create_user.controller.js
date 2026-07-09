@@ -1,7 +1,7 @@
-const userModel = require("../../model/user.model");
+const userModel = require("../../model/users.model");
 
 const createUser = async (req, res) => {
-  const { fullName,email, password } = req.body;
+  const { fullName, email, password } = req.body;
   if (!fullName || !email || !password) {
     return res.status(400).json({
       status_code: 400,
