@@ -13,7 +13,6 @@ const app = express();
 const port = process.env.PORT;
 const DB_URL = process.env.DB_URL;
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -32,14 +31,14 @@ app.use(
       }
     },
     credentials: true,
-  })
+  }),
 );
-
 
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
 app.use("/api/v1/users", userRoutes);
 
+// console.log(process.env.DB_URL);
 
 mongoose
   .connect(DB_URL)
@@ -49,14 +48,13 @@ mongoose
     process.exit(1);
   });
 
-
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "Welcome to Pet Stay",
   });
 });
 
-// app.listen(port, ()=>{
-//     console.log(`Server is running on port ${port}`);
-// })
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 module.exports = app;
