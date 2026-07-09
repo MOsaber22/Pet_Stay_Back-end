@@ -47,8 +47,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/cats", catsRoutes);
 
 
-app.listen(port, ()=>{
-    console.log(`Server is running on port ${port}`);
-})
-// module.exports = app;
+// app.listen(port, ()=>{
+//     console.log(`Server is running on port ${port}`);
+// })
+module.exports = app;
  
