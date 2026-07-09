@@ -2,13 +2,10 @@ const Cart = require("../../model/cart.model");
 
 const removeFromCart = async (req, res) => {
   try {
-    console.log(req.body);
     const { userId, catId } = req.body;
 
-    console.log(userId);
-    console.log(catId);
     const cart = await Cart.findOne({ user: userId });
-    console.log(cart);
+
     if (!cart) {
       return res.status(404).json({
         message: "Cart not found",
