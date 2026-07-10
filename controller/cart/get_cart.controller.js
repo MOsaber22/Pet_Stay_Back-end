@@ -1,18 +1,13 @@
 const Cart = require("../../model/cart.model");
 
-const getCart = async (req, res) => {
+const getAllCarts = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const carts = await Cart.find().populate("cats");
 
-    const cart = await Cart.findOne({ user: userId }).populate("cats");
-
-    if (!cart) {
-      return res.status(404).json({
-        message: "Cart not found",
-      });
-    }
-
-    res.status(200).json(cart);
+    res.status(200).json({
+      message: "All carts retrieved successfully",
+      data: carts,
+    });
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -20,4 +15,4 @@ const getCart = async (req, res) => {
   }
 };
 
-module.exports = getCart;
+module.exports = getAllCarts;
