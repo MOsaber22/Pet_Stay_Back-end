@@ -1,15 +1,15 @@
 const bcrypt = require("bcryptjs");
-const User = require("../models/User");
+const User = require("../model/users.model");
 const generateToken = require("../utils/generateToken");
 
 // signup (register)
 const signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { fullName, email, password } = req.body;
 
-    if (!name || !email || !password) {
+    if (!fullName || !email || !password) {
       return res.status(400).json({
-        message: "Name, email and password are required",
+        message: "Full name, email and password are required",
       });
     }
 
@@ -21,8 +21,10 @@ const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    console.log("DB NAME:", User.db.name);
+
     const user = await User.create({
-      name,
+      fullName,
       email,
       password: hashedPassword,
       role: "user",
@@ -35,7 +37,7 @@ const signup = async (req, res) => {
       token,
       user: {
         id: user._id,
-        name: user.name,
+        fullName: user.fullName,
         email: user.email,
         role: user.role,
       },
@@ -72,7 +74,7 @@ const login = async (req, res) => {
       token,
       user: {
         id: user._id,
-        name: user.name,
+        fullName: user.fullName,
         email: user.email,
         role: user.role,
       },

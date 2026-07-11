@@ -40,6 +40,8 @@ app.use("/api/v1/cats", catsRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/auth", authRoutes);
 
+console.log(DB_URL);
+
 mongoose
   .connect(DB_URL)
   .then(() => {
