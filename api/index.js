@@ -44,7 +44,7 @@ mongoose
   .connect(DB_URL)
   .then(() => console.log("Database connected successfully"))
   .catch(() => {
-    console.log("Database connection failed");
+    console.log("Database connection failed:");
     process.exit(1);
   });
 
