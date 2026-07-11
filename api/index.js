@@ -2,33 +2,16 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-<<<<<<< HEAD
-const authRoutes = require("../routes/authRoutes");
-
-const app = express();
-
-const port = process.env.PORT || 3000;
-const DB_URL = process.env.DB_URL;
-
-app.use(express.json());
-
-mongoose
-  .connect(DB_URL)
-  .then(() => {
-    console.log("Database connected successfully");
-  })
-  .catch((err) => {
-    console.log("Database connection failed:", err.message);
-=======
 const cors = require("cors");
 
+const authRoutes = require("../routes/authRoutes");
 const catsRoutes = require("../routes/cats.routes");
 const cartRoutes = require("../routes/cart.routes");
 const userRoutes = require("../routes/user.routes");
 
 const app = express();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const DB_URL = process.env.DB_URL;
 
 app.use(express.json());
@@ -55,15 +38,15 @@ app.use(
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
 app.use("/api/v1/users", userRoutes);
-
-// console.log(process.env.DB_URL);
+app.use("/api/auth", authRoutes);
 
 mongoose
   .connect(DB_URL)
-  .then(() => console.log("Database connected successfully"))
-  .catch(() => {
-    console.log("Database connection failed");
->>>>>>> c787304eaa6bb5d9a428e28c036d10f8cf7224d3
+  .then(() => {
+    console.log("Database connected successfully");
+  })
+  .catch((err) => {
+    console.log("Database connection failed:", err.message);
     process.exit(1);
   });
 
@@ -73,15 +56,8 @@ app.get("/", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
-app.use("/api/auth", authRoutes);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-=======
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
 module.exports = app;
->>>>>>> c787304eaa6bb5d9a428e28c036d10f8cf7224d3
