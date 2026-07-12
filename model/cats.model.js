@@ -34,7 +34,7 @@ const catsSchema = new mongoose.Schema(
     },
     image: {
       type: [String],
-      required: [true, "Image is required"],
+      // required: [true, "Image is required"],
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
@@ -49,7 +49,13 @@ const catsSchema = new mongoose.Schema(
       type: String,
       enum: governorates,
       required: [true, "location is required"],
-    }
+    },
+    weight: {
+      type: Number,
+      min: [1, "Weight must be at least 1 kg"],
+      max: [12, "Weight cannot exceed 12 kg"],
+      required: true,
+    },
   },
   { timestamps: true },
 );
