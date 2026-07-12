@@ -1,7 +1,8 @@
 const catsModel = require("../../model/cats.model");
 
 const addNewCat = async (req, res) => {
-  const { name, age, gender, breed, image, location, weight } = req.body;
+  const { name, age, gender, breed, location, weight, temperament, story } = req.body;
+  const image = req.file;
   if (!name || !age || !gender || !breed || !location || !weight ) {
     return res.status(400).json({
       status_code: 400,
@@ -10,7 +11,17 @@ const addNewCat = async (req, res) => {
     });
   }
   try {
-    const newCat = await catsModel.create(req.body);
+    const newCat = await catsModel.create({
+      name,
+      age,
+      gender,
+      breed,
+      location,
+      weight,
+      temperament,
+      story,
+      image: req.file.path,
+    });
     return res.status(201).json({
       status_code: 201,
       message: "New cat added successfully",
