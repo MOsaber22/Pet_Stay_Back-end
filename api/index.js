@@ -18,8 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = [
-  "https://pet-stay-back-end.vercel.app",
-  "http://localhost:5173",
+  "https://pet-stay-back-end.vercel.app/",
+  "http://localhost:5173/",
 ];
 
 app.use(
