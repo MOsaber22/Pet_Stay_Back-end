@@ -3,6 +3,13 @@ const catsModel = require("../../model/cats.model");
 const addNewCat = async (req, res) => {
   const { name, age, gender, breed, location, weight, temperament, story } = req.body;
   const image = req.file;
+  if (!image) {
+  return res.status(400).json({
+    status_code: 400,
+    message: "Please upload a cat image.",
+    data: null,
+  });
+}
   if (!name || !age || !gender || !breed || !location || !weight ) {
     return res.status(400).json({
       status_code: 400,
@@ -20,7 +27,7 @@ const addNewCat = async (req, res) => {
       weight,
       temperament,
       story,
-      image: req.file.path,
+      image: image.path,
     });
     return res.status(201).json({
       status_code: 201,
