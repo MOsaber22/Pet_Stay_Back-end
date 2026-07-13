@@ -36,6 +36,7 @@ const addNewCat = async (req, res) => {
       data: newCat,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       status_code: 500,
       message: err.message,
