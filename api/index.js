@@ -17,7 +17,7 @@ const DB_URL = process.env.DB_URL;
 
 const allowedOrigins = [
   "https://pet-stay-platform.vercel.app",
-  "http://localhost:5173/",
+  "http://localhost:5173",
 ];
 
 app.use(
@@ -41,7 +41,6 @@ app.use("/api/v1/cats", catsRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/auth", authRoutes);
 
-console.log(DB_URL);
 
 mongoose
   .connect(DB_URL)
