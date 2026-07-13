@@ -14,12 +14,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 const DB_URL = process.env.DB_URL;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = [
-  "https://pet-stay-back-end.vercel.app",
-  "http://localhost:5173",
+  "https://pet-stay-back-end.vercel.app/",
+  "http://localhost:5173/",
 ];
 
 app.use(
@@ -34,6 +32,9 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
