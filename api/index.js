@@ -17,7 +17,7 @@ const DB_URL = process.env.DB_URL;
 
 const allowedOrigins = [
   "https://pet-stay-platform.vercel.app",
-  "http://localhost:5173",
+  "http://localhost:5173/",
 ];
 
 app.use(
