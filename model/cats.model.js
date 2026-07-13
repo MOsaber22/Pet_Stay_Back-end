@@ -33,7 +33,7 @@ const catsSchema = new mongoose.Schema(
       default: "available",
     },
     image: {
-      type: [String],
+      type: String,
       // required: [true, "Image is required"],
     },
     owner: {
