@@ -27,6 +27,7 @@ const editCat = async (req, res) => {
       data: updatedCat,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       status_code: 500,
       message: err.message,
