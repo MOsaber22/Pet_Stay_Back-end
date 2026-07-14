@@ -7,11 +7,11 @@ const getUserById = require("../controller/user/get_user_by_id.controller");
 const updateUser = require("../controller/user/update_user.controller");
 
 const isAdmin = require("../middleware/isAdmin.middleware");
+const verifyToken = require("../middleware/verifyToken.middleware");
 
-
-routes.get("/", isAdmin, getAllUsers);
-routes.get("/:userId", getUserById);
-routes.put("/:userId", isAdmin, updateUser);
+routes.get("/", verifyToken, isAdmin, getAllUsers);
+routes.get("/:userId", verifyToken, getUserById);
+routes.put("/:userId", verifyToken, isAdmin, updateUser);
 
 
 module.exports = routes;

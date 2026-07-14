@@ -7,6 +7,7 @@ const cors = require("cors");
 const catsRoutes = require("../routes/cats.routes");
 const cartRoutes = require("../routes/cart.routes");
 const userRoutes = require("../routes/user.routes");
+const authRoutes = require("../routes/auth.routes");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 // console.log(process.env.DB_URL);
 
