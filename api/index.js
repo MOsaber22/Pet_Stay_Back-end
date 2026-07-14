@@ -4,11 +4,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const authRoutes = require("../routes/authRoutes");
 const catsRoutes = require("../routes/cats.routes");
 const cartRoutes = require("../routes/cart.routes");
 const userRoutes = require("../routes/user.routes");
-const authRoutes = require("../routes/auth.routes");
+// const authRoutes = require("../routes/auth.routes");
 
 const app = express();
 
@@ -40,8 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
 app.use("/api/v1/users", userRoutes);
-
-app.use("/api/v1/auth", authRoutes);
+// app.use("/api/v1/auth", authRoutes);
 
 mongoose
   .connect(DB_URL)
@@ -59,8 +57,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 module.exports = app;
