@@ -1,9 +1,6 @@
-const userModel = require("../model/users.model");
-
-const isAdmin = async (req, res, next) => {
-  const userId = req.headers["x-user-id"];
-  
-  if (!userId) {
+const isAdmin = (req, res, next) => {
+  // `req.user` is expected to be populated by the `verifyToken` middleware
+  if (!req.user) {
     return res.status(401).json({
       status_code: 401,
       message: "Unauthorized",
@@ -11,33 +8,15 @@ const isAdmin = async (req, res, next) => {
     });
   }
 
-  try {
-    const user = await userModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({
-        status_code: 404,
-        message: "User not found",
-        data: null,
-      });
-    }
-
-    if (user.role !== "admin") {
-      return res.status(403).json({
-        status_code: 403,
-        message: "Admins only",
-        data: null,
-      });
-    }
-
-    req.admin = user;
-    next();
-  } catch (err) {
-    return res.status(500).json({
-      status_code: 500,
-      message: err.message,
+  if (req.user.role !== "admin") {
+    return res.status(403).json({
+      status_code: 403,
+      message: "Admins only",
       data: null,
     });
   }
+
+  next();
 };
 
 module.exports = isAdmin;
