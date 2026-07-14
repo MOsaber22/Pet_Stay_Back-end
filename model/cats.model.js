@@ -30,7 +30,7 @@ const catsSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["available", "adopted", "reserved", "pending", "rejected"],
-      default: "available",
+      default: "pending",
     },
     image: {
       type: String,
