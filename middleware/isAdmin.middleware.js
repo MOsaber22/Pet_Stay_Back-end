@@ -3,7 +3,7 @@ const isAdmin = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({
       status_code: 401,
-      message: "Unauthorized",
+      message: "Unauthorized - No token provided",
       data: null,
     });
   }
