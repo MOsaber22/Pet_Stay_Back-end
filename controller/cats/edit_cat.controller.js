@@ -3,6 +3,9 @@ const catsModel = require("../../model/cats.model");
 const editCat = async (req, res) => {
   const catId = req.params.catId;
   const catData = req.body;
+  if (req.file) {
+    catData.image = req.file.path;
+  }
 
   try {
     const updatedCat = await catsModel.findByIdAndUpdate(catId, catData, {

@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const authRoutes = require("../routes/authRoutes");
 const catsRoutes = require("../routes/cats.routes");
 const cartRoutes = require("../routes/cart.routes");
 const userRoutes = require("../routes/user.routes");
@@ -11,11 +12,9 @@ const authRoutes = require("../routes/auth.routes");
 
 const app = express();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const DB_URL = process.env.DB_URL;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = [
   "https://pet-stay-platform.vercel.app",
@@ -35,18 +34,22 @@ app.use(
   }),
 );
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/cats", catsRoutes);
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/auth", authRoutes);
 
-// console.log(process.env.DB_URL);
+app.use("/api/v1/auth", authRoutes);
 
 mongoose
   .connect(DB_URL)
-  .then(() => console.log("Database connected successfully"))
-  .catch(() => {
-    console.log("Database connection failed:");
+  .then(() => {
+    console.log("Database connected successfully");
+  })
+  .catch((err) => {
+    console.log("Database connection failed:", err.message);
     process.exit(1);
   });
 
@@ -56,7 +59,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
+
 module.exports = app;

@@ -30,10 +30,10 @@ const catsSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["available", "adopted", "reserved", "pending", "rejected"],
-      default: "available",
+      default: "pending",
     },
     image: {
-      type: [String],
+      type: String,
       required: [true, "Image is required"],
     },
     owner: {
@@ -49,7 +49,13 @@ const catsSchema = new mongoose.Schema(
       type: String,
       enum: governorates,
       required: [true, "location is required"],
-    }
+    },
+    weight: {
+      type: Number,
+      min: [1, "Weight must be at least 1 kg"],
+      max: [12, "Weight cannot exceed 12 kg"],
+      required: true,
+    },
   },
   { timestamps: true },
 );
