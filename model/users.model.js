@@ -26,6 +26,18 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
+    useravater: {
+      type: String,
+      default: "",
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     timestamps: true,
